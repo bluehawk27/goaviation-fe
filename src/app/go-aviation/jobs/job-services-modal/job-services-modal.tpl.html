@@ -1,0 +1,25 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="serviceModalLabel">
+        Job Services
+    </h4>
+</div>
+
+<div class="modal-body">
+    <ul>
+        <li ng-repeat="service in checkoff">
+
+            <button type="button" class="btn btn-primary" ng-click="set_service(service.instance_id)">
+                {{service.name}}
+            </button>
+
+            <ul ng-if="visible_service === service.instance_id" >
+                <li ng-repeat="item in service.items">
+                <label>{{item.name}}<input type="checkbox" ng-model="item.completed" ng-change="update_checkoff_list(service)"></label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="close()">Close</button>
+</div>

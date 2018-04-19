@@ -1,0 +1,109 @@
+<go-nav></go-nav>
+<div class="container-fluid">
+    <h3 class="page-header text-center">Profile</h3>
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="service-form-header"></div>
+            <div class="well service-form">
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="companyName">Company Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="companyName" ng-model="profile.company_name"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="companyAddress">Company Address</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="companyAddress" ng-model="profile.company_address"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="companyPhone">Company Phone</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="companyphone" ng-model="profile.company_phone"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="email">Email</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="email" ng-model="profile.email"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="opsContactName">Ops Contact Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="opsContactName" ng-model="profile.ops_contact_name"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="opsContactName">Ops Contact Number</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="opsContactNumber" ng-model="profile.ops_contact_number"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="opsContactEmail">Ops Contact Email</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="opsContactEmail" ng-model="profile.ops_contact_email"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="emergencyContactName">Emergency Contact Name</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="emergencyContactName" ng-model="profile.emergency_contact_name"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="emergencyContactName">Emergency Contact Number</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="emergencyContactNumber" ng-model="profile.emergency_contact_number"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label" for="emergencyContactEmail">Emergency Contact Email</label>
+                            <div class="col-sm-8">
+                                <input class="form-control" id="emergencyContactEmail" ng-model="profile.emergency_contact_email"></input>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-sm-10 col-sm-offset-1">
+                            <label class="col-sm-4 control-label">Aircraft</label>
+                            <ul class="form-group col-sm-8 col-sm-offset-2 unstyled-list" >
+                                <li class="col-sm-12" ng-repeat="aircraft in aircraft_list">
+                                    <div class="col-sm-12">
+                                        <a class="form-control" ng-click=aircraft_modal(aircraft)>{{aircraft.aircraft_type}} {{aircraft.tail_number}}</a>
+                                    </div>
+                                </li>
+                                <li class="col-sm-12">
+                                    <div class="col-sm-12">
+                                        <button class="btn btn-primary btn-add-aircraft col-sm-12" ng-click="aircraft_modal(null)">
+                                            Add Aircraft
+                                        </button>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                        <div class="form-group">
+                            <div class="col-sm-3 pull-right">
+                                <button class="go-btn pull-right" ng-click="update_profile()"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

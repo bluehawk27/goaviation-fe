@@ -1,0 +1,20 @@
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand brand-icon" ui-sref="schedule"></a>
+        </div>
+        <div id="navbar" class="pull-right">
+            <ul class="nav navbar-nav navbar-right nav-options">
+                <li><a ui-sref="schedule" title="Schedule">Schedule</a></li>
+                <li><a ui-sref="past-work" title="Past Work">See Past Work</a></li>
+                <li><a ui-sref="future-work" title="Scheduled Work">Scheduled Work</a></li>
+                <li ng-if="!$root.user.is_admin"><a ui-sref="admin" title="Admin">Admin</a></li>
+                <li ng-if="!$root.user.is_admin"><a ui-sref="services" title="Manage Services">Manage Services</a></li>
+                <li ng-if="!$root.user.is_admin"><a ui-sref="check-lists" title="Manage Check Lists">Manage Check Lists</a></li>
+                <li><a ui-sref="profile" title="Profile">Profile</a></li>
+                <li><a ng-click="logout()" title="Log out" class="log-out">Log out</a></li>
+            </ul>
+            <div class="navbar-right left-triangle hidden-md hidden-sm hidden-xs"></div>
+        </div>
+    </div>
+</nav>

@@ -1,0 +1,43 @@
+{
+  "name": "angular-ui-bootstrap-datetimepicker",
+  "version": "1.4.0",
+  "description": "Date-time picker AngularJS Bootstrap plugin",
+  "keywords": [
+    "date",
+    "time",
+    "picker",
+    "angularjs",
+    "bootstrap"
+  ],
+  "authors": [
+    "Vitalii Fedorenko"
+  ],
+  "main": [
+    "./datetimepicker.js",
+    "./datetimepicker.css"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/zhaber/datetimepicker",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "example.js",
+    "index.html",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-bootstrap": ">=1.2.4",
+    "angular": ">=1.4.4"
+  },
+  "_release": "1.4.0",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.4.0",
+    "commit": "5b6aada36696f3320118ee2b8afc2cfd49f88bb7"
+  },
+  "_source": "https://github.com/zhaber/datetimepicker.git",
+  "_target": "^1.3.3",
+  "_originalSource": "angular-ui-bootstrap-datetimepicker"
+}

@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="checkListModalLabel">
+        {{modal_action}}
+    </h4>
+
+</div>
+
+<div class="modal-body">
+    <form class="form-horizontal">
+
+        <div class="form-group col-sm-10 col-sm-offset-1">
+            <label class="col-sm-4 control-label" for="listName">Check List Name</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="listName" ng-model="list.name">
+            </div>
+        </div>
+
+
+        <div class="col-sm-8 col-sm-offset-4">
+            <div class="col-sm-12" ng-repeat="list_item in list.items | filter:item.id:id">
+                <button class="btn btn-primary col-sm-2" ng-click="remove_item($index)">x</button> {{list_item.name}}
+            </div>
+        </div>
+
+
+        <div class="form-group col-sm-10 col-sm-offset-1">
+            <label class="col-sm-4 control-label">Check Off Item</label>
+            <div class="col-sm-8">
+                <select class="form-control"  ng-model="item_to_add" ng-options="option as option.name for option in available_items" ng-change="add_item()"></select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-3 pull-right">
+                <button class="go-btn" ng-click="check_off_item_modal()">Add Check Off Item</button>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-3 pull-right">
+                <button class="go-btn pull-right" ng-click="save_list()">Save</button>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="close()">Close</button>
+</div>

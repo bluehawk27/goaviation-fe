@@ -1,0 +1,278 @@
+// ----------------------------------------------------------------------------
+// Put your application specific styling here.
+//
+// These styles WILL be included if this module is included in another project,
+// so be sure that anything in here is functionality related, and not a theme.
+// All theme related style should be in the appropriate `container.less` file
+// ----------------------------------------------------------------------------
+
+@import "bootstrap/less/variables.less";
+@import "bootstrap/less/mixins.less";
+
+body {
+    font-size: 14px;
+    font-family: 'Michroma', sans-serif;
+    letter-spacing: 1px
+}
+
+.check-off-item-modal {
+    z-index: 1060;
+}
+
+.unstyled-list {
+    list-style: none;
+}
+
+.brand-icon {
+    background-size: contain;
+    background-image: url("/assets/go-icon.png");
+    background-repeat: no-repeat;
+    width: 189px;
+    height: 141px;
+    display: inline-block;
+}
+.btn-primary {
+    background-color: #C89371;
+    border: none;
+    &.btn-add-aircraft {
+        background-color: #000;
+        color: #C89371;
+        border: #fff solid 2px;
+        border-radius: 5px;
+        margin-top: 10px;
+    }
+}
+table.table-striped {
+    font-size: 14px;
+    margin-top: 20px;
+    thead {
+        background-color: #C89371;
+        border: none;
+        color: #fff;
+    }
+
+    .go-tr:nth-of-type(even) {
+        background-color: #F7E7E0;
+    }
+
+    .go-tr:nth-of-type(odd) {
+        background-color: transparent;
+    }
+}
+
+input, td {
+    font-family: Arial;
+    letter-spacing: 3px
+}
+
+.service-form-header {
+    height: 20px;
+    width: 100%;
+    background-color: #000000;
+}
+
+.service-form {
+    background-color: #C89371;
+    border: none;
+    color: white;
+    border-radius: 0px;
+    .go-btn {
+        height: 100px;
+        width: 100px;
+        border: none;
+        background-color: transparent;
+        background-image: url(/assets/go-button.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        margin: 25px 50px 0 0;
+    }
+}
+
+
+.image-container {
+    background: #eeeeee;
+    border: #bbbbbb;
+
+    .image-delete {
+        position: absolute;
+        z-index: 1000;
+        right: 0;
+        opacity: 0.3;
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+.ui-sortable-helper {
+    display: table;
+}
+
+.navbar {
+    z-index: 10;
+    background-color: transparent;
+    border: none;
+
+    .nav-options {
+        background-color: #CACACA;
+        color: #000000;
+        margin-top: 41px;
+    }
+
+    .left-triangle {
+        width: 0px;
+        height: 0px;
+        /* csslint ignore:start */
+        border-bottom: 23px solid transparent;
+        border-right: 14px solid #979797;
+        /* csslint ignore:end */
+        margin-top: 68px;
+    }
+}
+
+.page-header {
+    border: none;
+    text-align: center;
+    padding: 0;
+    margin: 0 0 40px;
+    text-transform: uppercase;
+}
+
+.sub-heading {
+    display: block;
+    margin-top: 5px;
+}
+
+.text-bold {
+    font-weight: bold;
+}
+.add-margin-bottom-20 {
+    margin-bottom: 20px;
+}
+.add-margin-bottom-40 {
+    margin-bottom: 40px;
+}
+.add-margin-left-20 {
+    margin-left: 20px;
+}
+.no-margin {
+    margin: 0;
+}
+.no-border {
+    border: 0;
+}
+
+
+
+
+ .column-header, .log-out, .action  {
+    cursor: pointer;
+}
+
+.deleted-row{
+    td {
+        opacity: .25;
+        text-decoration: line-through;
+        &:last-of-type {
+            opacity: 1;
+            text-decoration: none;
+        }
+        .glyphicon-trash, .glyphicon-sort {
+            display: none;
+        }
+        .glyphicon-repeat {
+            display: block;
+        }
+    }
+}
+
+.config-save {
+    position: fixed;
+    padding-left: 10%;
+    z-index: 100;
+    background-color: #f8f8f8;
+    right: 10px;
+    .btn {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+}
+
+.needs-verticle-alignment>tbody>tr>td {
+    vertical-align: middle;
+}
+
+.progress-bar-column {
+    min-width: 100px;
+}
+
+.progress {
+    margin-bottom: 0;
+}
+
+.chart-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 180px;
+    height: 180px;
+}
+
+.paginate-date {
+    padding-bottom: 9px;
+}
+
+.event-message {
+    white-space: pre-wrap;
+}
+
+.schedule-date {
+    ng-form {
+        width: 100%;
+        .datetimepicker-wrapper {
+            width:100%;
+            .form-control {
+                width: 100%
+            }
+        }
+    }
+}
+
+.modal {
+    .modal {
+        z-index: 1060;
+
+        &:parent {
+            z-index: 1040;
+        }
+    }
+}
+
+.glyphicon {
+    display: inline-block;
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.glyphicon-chevron-left:before {
+  content: "\f053";
+}
+
+.glyphicon-chevron-right:before {
+  content: "\f054";
+}
+
+footer {
+    border-top: 1px solid #9A9596;
+    .powered-by {
+        background-size: contain;
+        background-image: url("/assets/powered-by.png");
+        background-repeat: no-repeat;
+        width: 189px;
+        height: 50px;
+        display: inline-block;
+        margin: 15px 30px 15px 0;
+    }
+}

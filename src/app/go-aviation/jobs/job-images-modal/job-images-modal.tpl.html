@@ -1,0 +1,18 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="serviceModalLabel">
+        Job Images
+    </h4>
+</div>
+
+<div class="modal-body">
+    <h5>Before Images</h5>
+
+    <image-upload resource-path="'before-images/'" parent-type="'job'" image-name="'before_image'" parent-path="'job/'" parent-resource="job" array-name="'before_images'" image-type="'before_image'" image-id="'beforeImage'"></image-upload>
+
+    <h5>After Images</h5>
+    <image-upload resource-path="'after-images/'" parent-type="'job'" image-name="'after_image'" parent-path="'job/'" parent-resource="job" array-name="'after_images'" image-type="'after_image'" image-id="'afterImage'"></image-upload>
+
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="close()">Close</button>
+</div>

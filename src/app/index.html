@@ -1,0 +1,24 @@
+<html lang="en"
+      ng-app="go.aviation.app.container"
+      ng-controller="go.aviation.app.container.AppCtrl">
+    <head>
+        <title ng-bind="title">Go Aviation</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://fonts.googleapis.com/css?family=Michroma" rel="stylesheet">
+        <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+        <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+        <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+        <script type="text/javascript" src="<%= file %>"></script><% }); %>
+        <base href="/" />
+    </head>
+    <body>
+        <div>
+            <div ui-view></div>
+        </div>
+        <footer>
+            <div class="powered-by pull-right"></div>
+        </footer>
+    </body>
+</html>

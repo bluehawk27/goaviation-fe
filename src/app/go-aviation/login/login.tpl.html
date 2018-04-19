@@ -1,0 +1,17 @@
+<div class="container-fluid">
+    <div class="row" >
+        <div class="col-md-12 col-md-offset-4">
+            <div go-aviation-alert error="login_error" counter="failed_logins"></div>
+            <form>
+                <h3>Go Aviation</h3>
+                <p class="input-group">
+                    <input ng-model="credentials.username" id="inputUsername" class="form-control" placeholder="Email address" required autofocus>
+                </p>
+                <p class="input-group">
+                    <input type="password" id="inputPassword" class="form-control" placeholder="Password" required ng-model="credentials.password" ng-model-options="{updateOn: 'keyup'}">
+                </p>
+                <p><button ng-click="login()" class="btn btn-primary" type="submit">Sign in</button></p>
+            </form>
+        </div>
+    </div>
+</div> <!-- /container -->

@@ -1,0 +1,25 @@
+<div class="col-sm-12 add-margin-bottom-20">
+    <service-date-range start="startDate" end="endDate"></service-date-range>
+</div>
+<div id="job-report" class="col-sm-10 col-sm-offset-1 add-margin-bottom-40">
+    <table class="table table-striped table-hover needs-verticle-alignment">
+        <thead table-headers column="column" list="headers" invert="reverse_column">
+        </thead table-headers>
+        <tbody>
+            <tr ng-repeat='job in list | filter:{completed: completed} | orderBy:column:reverse_column' id='job-{{job.id}}' ng-switch="completed" class="go-tr">
+                <td class="col-md-3" ng-switch-when="true">{{job.service_end | date:'MM/dd/yyyy'}}</td>
+                <td class="col-md-3" ng-switch-when="false">{{job.service_start | date:'MM/dd/yyyy'}}</td>
+                <td class="col-md-1">{{job.aircraft.aircraft_type}}</td>
+                <td class="col-md-2">{{job.aircraft.tail_number}}</td>
+                <td class="col-md-2">
+                    <button class="btn btn-sm btn-primary" ng-click="service_modal(job)">{{job.services.length}}</button>
+                </td>
+                <td class="col-md-2">
+                    <button class="btn btn-sm btn-primary" ng-click="images_modal(job)">{{job.before_images.length+job.after_images.length}}</button>
+                </td>
+                <td class="col-md-1">{{job_duration(job.time_to_complete)}}</td>
+                <td class="col-md-1">{{job.location}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

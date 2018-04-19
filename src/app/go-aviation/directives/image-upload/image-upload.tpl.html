@@ -1,0 +1,12 @@
+<form>
+    <div class="col-sm-12">
+        <div class="col-sm-3 image-container form-group" ng-repeat="image in parentResource[arrayName]">
+            <button class="image-delete" ng-click="remove_image(image)">X</button>
+            <img class="col-sm-12" src="{{image[imageType]}}">
+        </div>
+    </div>
+    <div class="form-group">
+        <input type="file" name="img" id="{{imageId}}" multiple>
+        <button class="pull-right" ng-click="upload_image()">Upload Image</button>
+    </div>
+</form>

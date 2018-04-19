@@ -1,0 +1,72 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="serviceModalLabel">
+        {{modal_action}}
+    </h4>
+
+</div>
+
+<div class="modal-body">
+    <form class="form-horizontal">
+
+        <div class="form-group col-sm-10 col-sm-offset-1">
+            <label class="col-sm-4 control-label" for="tailNumber">Tail Number</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="tailNumber" ng-model="aircraft.tail_number">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-10 col-sm-offset-1">
+            <label class="col-sm-4 control-label" for="aircraftType">Aircraft Type</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="aircraftType" ng-model="aircraft.aircraft_type">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-10 col-sm-offset-1">
+            <label class="col-sm-4 control-label" for="aircraftColor">Color</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="aircraftColor" ng-model="aircraft.color">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-10 col-sm-offset-1">
+            <label class="col-sm-4 control-label" for="aircraftYear">Model Year</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="aircraftYear" ng-model="aircraft.year">
+            </div>
+        </div>
+
+
+        <div class="form-group col-sm-10 col-sm-offset-1">
+            <label class="col-sm-4 control-label" for="notes">Damage Notes</label>
+            <div class="col-sm-8">
+                <textarea class="form-control" id="notes" ng-model="aircraft.damage_notes"></textarea>
+            </div>
+        </div>
+
+        <div class="form-group col-sm-10 col-sm-offset-1" ng-show="aircraft.reported">
+            <label class="col-sm-4 control-label" for="reportedDate">Repored Date</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="reportedDate" ng-model="aircraft.reported_date">
+            </div>
+        </div>
+
+        <div class="form-group col-sm-10 col-sm-offset-1" ng-show="aircraft.reported">
+            <label class="col-sm-4 control-label" for="reportedTo">Repored To</label>
+            <div class="col-sm-8">
+                <input class="form-control" id="reportedTo" ng-model="aircraft.reported_to">
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <div class="col-sm-3 pull-right">
+                <button class="pull-right" ng-click="save_aircraft()">Save</button>
+            </div>
+        </div>
+    </form>
+    <image-upload resource-path="'aircraft-images/'" parent-type="'aircraft'" image-name="'aircraft_image'" parent-path="'aircraft/'" parent-resource="aircraft" array-name="'images'" image-type="'aircraft_image'" image-id="'aircraftImage'"></image-upload>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary" ng-click="close()">Close</button>
+</div>

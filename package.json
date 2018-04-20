@@ -10,6 +10,7 @@
     "main": "index.js",
     "scripts": {
         "test": "gulp test",
+        "build": "gulp",
         "start": "gulp watch"
     },
     "dependencies": {

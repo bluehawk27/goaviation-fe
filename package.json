@@ -5,7 +5,7 @@
     "author": "",
     "description": "base ng project",
     "engines": {
-        "node": "6.6.0"
+        "node": "8.0.0"
     },
     "main": "index.js",
     "scripts": {

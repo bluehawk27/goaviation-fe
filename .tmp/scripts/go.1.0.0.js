@@ -93716,98 +93716,6 @@ angular.module('go.aviation.app')
     }
 ]);
 /**
- * Check-list-modal Controller
- */
-angular.module('go.aviation.app')
-
-.controller('CheckListModalCtrl',[
-    '$scope',
-    '$uibModalInstance',
-    '$uibModal',
-    'GoResource',
-    'list',
-    'available_items',
-    'parentCtrlScope',
-
-    function CheckListModalCtrl ($scope, $uibModalInstance, $uibModal, GoResource, list, available_items, parentCtrlScope) {
-        'use strict';
-
-        var edit_list = list ? true : false;
-
-        $scope.available_items = available_items;
-
-        $scope.modal_action = edit_list ? 'Edit Check List' : 'Add Check List';
-
-        $scope.list = list ||
-            {
-                id: null,
-                name: null,
-                items: []
-            };
-
-        $scope.item_to_add = null;
-
-        $scope.remove_item = function (index) {
-
-            $scope.list.items.splice(index,1);
-        };
-
-        $scope.add_item = function () {
-
-            if ($scope.item_to_add &&
-                $scope.list.items.indexOf($scope.item_to_add) < 0) {
-
-                $scope.list.items.push($scope.item_to_add);
-                $scope.item_to_add = null;
-            }
-        };
-
-        $scope.edit = function () {
-            $scope.update_list = list;
-            $scope.edit_list = true;
-        };
-
-        $scope.save_list = function () {
-
-            var method = edit_list ? GoResource.update_resource : GoResource.add_resource;
-
-            method('checkoff-list-template/', $scope.list).then(function (result) {
-                $scope.list = result;
-
-                if (!edit_list) {
-                    parentCtrlScope.list_list.push(list);
-                }
-
-                $scope.close();
-            });
-        };
-
-        $scope.check_off_item_modal = function (item) {
-
-            $uibModal.open({
-                templateUrl: 'go-aviation/check-lists/check-list-modal/check-off-item-modal/check-off-item-modal.tpl.html',
-                windowClass: 'check-off-item-modal',
-                controller: 'CheckOffItemModalCtrl',
-                resolve: {
-
-                    item: function () {
-                        return item;
-                    },
-
-                    parentCtrlScope: function () {
-                        return $scope;
-                    }
-                }
-            });
-        };
-
-        $scope.close = function () {
-            $uibModalInstance.dismiss('close');
-        };
-    }
-]);
-
-/**
  * Alert Directive Controller
  */
 angular.module('go.aviation.app')
@@ -93851,90 +93759,6 @@ angular.module('go.aviation.app')
 
             templateUrl: 'go-aviation/directives/alert/alert-dir.tpl.html',
             replace: false
-        };
-    }
-]);
-
-/**
- * Nav Directive Controller
- */
-angular.module('go.aviation.app')
-
-.controller('GoNavDirCtrl',[
-    '$rootScope',
-    '$scope',
-
-    function GoNavDirCtrl ($rootScope, $scope) {
-        'use strict';
-
-        $scope.logout = function () {
-            $rootScope.$broadcast('log_out');
-        };
-    }
-]);
-
-/**
- * Navigation directive
- */
-angular.module('go.aviation.app')
-
-.directive('goNav',[
-
-    function goNav () {
-        'use strict';
-
-        return {
-            restrict: 'E',
-            controller: 'GoNavDirCtrl',
-            templateUrl: 'go-aviation/directives/go-nav/go-nav.tpl.html',
-            replace: true
-        };
-    }
-]);
-
-/**
- * Service Date Range Directive Controller
- */
-angular.module('go.aviation.app')
-
-
-.controller('ServiceDateRangeDirCtrl',[
-    '$scope',
-    '$state',
-    '$stateParams',
-    'moment',
-    function ServiceDateRangeDirCtrl ($scope, $state, $stateParams, moment) {
-        'use strict';
-
-        $scope.change_date = function () {
-
-            var next_start = moment($scope.start).format('YYYY-MM-DD'),
-                next_end = moment($scope.end).format('YYYY-MM-DD');
-
-            $state.go($state.current.name, {start_date: next_start, end_date: next_end});
-        };
-    }
-]);
-
-/**
- * Service Date Range Directive
- */
-angular.module('go.aviation.app')
-
-.directive('serviceDateRange',[
-
-    function serviceDateRange () {
-        'use strict';
-
-        return {
-            restrict: 'E',
-            controller: 'ServiceDateRangeDirCtrl',
-            scope: {
-                start: '=',
-                end: '='
-            },
-            templateUrl: 'go-aviation/directives/service-date-range/service-date-range.tpl.html',
-            replace: true
         };
     }
 ]);
@@ -94002,6 +93826,43 @@ angular.module('go.aviation.app')
                 imageType: '=',
                 imageId: '='
             }
+        };
+    }
+]);
+
+/**
+ * Nav Directive Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('GoNavDirCtrl',[
+    '$rootScope',
+    '$scope',
+
+    function GoNavDirCtrl ($rootScope, $scope) {
+        'use strict';
+
+        $scope.logout = function () {
+            $rootScope.$broadcast('log_out');
+        };
+    }
+]);
+
+/**
+ * Navigation directive
+ */
+angular.module('go.aviation.app')
+
+.directive('goNav',[
+
+    function goNav () {
+        'use strict';
+
+        return {
+            restrict: 'E',
+            controller: 'GoNavDirCtrl',
+            templateUrl: 'go-aviation/directives/go-nav/go-nav.tpl.html',
+            replace: true
         };
     }
 ]);
@@ -94157,6 +94018,145 @@ angular.module('go.aviation.app')
             },
             templateUrl: 'go-aviation/directives/table-headers/table-headers.tpl.html',
             replace: false
+        };
+    }
+]);
+
+/**
+ * Service Date Range Directive Controller
+ */
+angular.module('go.aviation.app')
+
+
+.controller('ServiceDateRangeDirCtrl',[
+    '$scope',
+    '$state',
+    '$stateParams',
+    'moment',
+    function ServiceDateRangeDirCtrl ($scope, $state, $stateParams, moment) {
+        'use strict';
+
+        $scope.change_date = function () {
+
+            var next_start = moment($scope.start).format('YYYY-MM-DD'),
+                next_end = moment($scope.end).format('YYYY-MM-DD');
+
+            $state.go($state.current.name, {start_date: next_start, end_date: next_end});
+        };
+    }
+]);
+
+/**
+ * Service Date Range Directive
+ */
+angular.module('go.aviation.app')
+
+.directive('serviceDateRange',[
+
+    function serviceDateRange () {
+        'use strict';
+
+        return {
+            restrict: 'E',
+            controller: 'ServiceDateRangeDirCtrl',
+            scope: {
+                start: '=',
+                end: '='
+            },
+            templateUrl: 'go-aviation/directives/service-date-range/service-date-range.tpl.html',
+            replace: true
+        };
+    }
+]);
+
+/**
+ * Check-list-modal Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('CheckListModalCtrl',[
+    '$scope',
+    '$uibModalInstance',
+    '$uibModal',
+    'GoResource',
+    'list',
+    'available_items',
+    'parentCtrlScope',
+
+    function CheckListModalCtrl ($scope, $uibModalInstance, $uibModal, GoResource, list, available_items, parentCtrlScope) {
+        'use strict';
+
+        var edit_list = list ? true : false;
+
+        $scope.available_items = available_items;
+
+        $scope.modal_action = edit_list ? 'Edit Check List' : 'Add Check List';
+
+        $scope.list = list ||
+            {
+                id: null,
+                name: null,
+                items: []
+            };
+
+        $scope.item_to_add = null;
+
+        $scope.remove_item = function (index) {
+
+            $scope.list.items.splice(index,1);
+        };
+
+        $scope.add_item = function () {
+
+            if ($scope.item_to_add &&
+                $scope.list.items.indexOf($scope.item_to_add) < 0) {
+
+                $scope.list.items.push($scope.item_to_add);
+                $scope.item_to_add = null;
+            }
+        };
+
+        $scope.edit = function () {
+            $scope.update_list = list;
+            $scope.edit_list = true;
+        };
+
+        $scope.save_list = function () {
+
+            var method = edit_list ? GoResource.update_resource : GoResource.add_resource;
+
+            method('checkoff-list-template/', $scope.list).then(function (result) {
+                $scope.list = result;
+
+                if (!edit_list) {
+                    parentCtrlScope.list_list.push(list);
+                }
+
+                $scope.close();
+            });
+        };
+
+        $scope.check_off_item_modal = function (item) {
+
+            $uibModal.open({
+                templateUrl: 'go-aviation/check-lists/check-list-modal/check-off-item-modal/check-off-item-modal.tpl.html',
+                windowClass: 'check-off-item-modal',
+                controller: 'CheckOffItemModalCtrl',
+                resolve: {
+
+                    item: function () {
+                        return item;
+                    },
+
+                    parentCtrlScope: function () {
+                        return $scope;
+                    }
+                }
+            });
+        };
+
+        $scope.close = function () {
+            $uibModalInstance.dismiss('close');
         };
     }
 ]);

@@ -5,7 +5,8 @@
     "author": "",
     "description": "base ng project",
     "engines": {
-        "node": "8.0.0"
+        "node": "8.11.1",
+        "npm": "5.8.0"
     },
     "main": "index.js",
     "scripts": {
@@ -16,7 +17,6 @@
     "dependencies": {
         "colors": "^1.1.2",
         "connect-modrewrite": "~0.8.2",
-        "express": "^4.16.3",
         "glob": "=5.0.14",
         "gulp": "=3.9.0",
         "gulp-angular-protractor": "0.0.6",

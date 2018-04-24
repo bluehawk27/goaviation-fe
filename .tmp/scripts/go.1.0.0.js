@@ -93131,81 +93131,6 @@ angular.module('go.aviation.app')
  */
 angular.module('go.aviation.app')
 
-.controller('CheckListsCtrl',[
-    '$scope',
-    '$filter',
-    'GoResource',
-    '$uibModal',
-    function CheckListsCtrl ($scope, $filter, GoResource, $uibModal) {
-        'use strict';
-
-        var available_items = null;
-
-        GoResource.get_resource('checkoff-item/').then(function (result) {
-
-            available_items = result;
-
-        });
-
-        $scope.headers = [
-            {
-                title: 'Check List',
-                sort_key: 'name'
-            },
-            {
-                title: '',
-                sort_key: ''
-            },
-            {
-                title: '',
-                sort_key: ''
-            }
-        ];
-
-        $scope.lists_filter = '';
-
-        $scope.add_list_error = null;
-
-        GoResource.get_resource('checkoff-list-template/').then(function (result) {
-            $scope.lists = result;
-        });
-
-        $scope.delete_list = function (list) {
-            var list_index = $scope.lists.indexOf(list);
-
-            GoResource.delete_resource('checkoff-list-template/', list).then(function () {
-                $scope.lists.splice(list_index, 1);
-            });
-        };
-
-        $scope.list_modal = function (list) {
-
-            $uibModal.open({
-                templateUrl: 'go-aviation/check-lists/check-list-modal/check-list-modal.tpl.html',
-                controller: 'CheckListModalCtrl',
-                resolve: {
-                    list: function () {
-                        return list;
-                    },
-
-                    available_items: function () {
-
-                        return available_items;
-                    },
-
-                    parentCtrlScope: function () {
-                        return $scope;
-                    }
-                }
-            });
-        };
-    }
-]);
-/**
- * Admin Controller
- */
-angular.module('go.aviation.app')
-
 .controller('AdminStateCtrl',[
     '$scope',
     '$filter',
@@ -93280,6 +93205,81 @@ angular.module('go.aviation.app')
     }
 ]);
 
+/**
+ * Admin Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('CheckListsCtrl',[
+    '$scope',
+    '$filter',
+    'GoResource',
+    '$uibModal',
+    function CheckListsCtrl ($scope, $filter, GoResource, $uibModal) {
+        'use strict';
+
+        var available_items = null;
+
+        GoResource.get_resource('checkoff-item/').then(function (result) {
+
+            available_items = result;
+
+        });
+
+        $scope.headers = [
+            {
+                title: 'Check List',
+                sort_key: 'name'
+            },
+            {
+                title: '',
+                sort_key: ''
+            },
+            {
+                title: '',
+                sort_key: ''
+            }
+        ];
+
+        $scope.lists_filter = '';
+
+        $scope.add_list_error = null;
+
+        GoResource.get_resource('checkoff-list-template/').then(function (result) {
+            $scope.lists = result;
+        });
+
+        $scope.delete_list = function (list) {
+            var list_index = $scope.lists.indexOf(list);
+
+            GoResource.delete_resource('checkoff-list-template/', list).then(function () {
+                $scope.lists.splice(list_index, 1);
+            });
+        };
+
+        $scope.list_modal = function (list) {
+
+            $uibModal.open({
+                templateUrl: 'go-aviation/check-lists/check-list-modal/check-list-modal.tpl.html',
+                controller: 'CheckListModalCtrl',
+                resolve: {
+                    list: function () {
+                        return list;
+                    },
+
+                    available_items: function () {
+
+                        return available_items;
+                    },
+
+                    parentCtrlScope: function () {
+                        return $scope;
+                    }
+                }
+            });
+        };
+    }
+]);
 /**
  * future-work Controller
  */
@@ -93893,6 +93893,53 @@ angular.module('go.aviation.app')
 ]);
 
 /**
+ * Service Date Range Directive Controller
+ */
+angular.module('go.aviation.app')
+
+
+.controller('ServiceDateRangeDirCtrl',[
+    '$scope',
+    '$state',
+    '$stateParams',
+    'moment',
+    function ServiceDateRangeDirCtrl ($scope, $state, $stateParams, moment) {
+        'use strict';
+
+        $scope.change_date = function () {
+
+            var next_start = moment($scope.start).format('YYYY-MM-DD'),
+                next_end = moment($scope.end).format('YYYY-MM-DD');
+
+            $state.go($state.current.name, {start_date: next_start, end_date: next_end});
+        };
+    }
+]);
+
+/**
+ * Service Date Range Directive
+ */
+angular.module('go.aviation.app')
+
+.directive('serviceDateRange',[
+
+    function serviceDateRange () {
+        'use strict';
+
+        return {
+            restrict: 'E',
+            controller: 'ServiceDateRangeDirCtrl',
+            scope: {
+                start: '=',
+                end: '='
+            },
+            templateUrl: 'go-aviation/directives/service-date-range/service-date-range.tpl.html',
+            replace: true
+        };
+    }
+]);
+
+/**
  * Image Upload Directive Controller
  */
 angular.module('go.aviation.app')
@@ -93955,53 +94002,6 @@ angular.module('go.aviation.app')
                 imageType: '=',
                 imageId: '='
             }
-        };
-    }
-]);
-
-/**
- * Service Date Range Directive Controller
- */
-angular.module('go.aviation.app')
-
-
-.controller('ServiceDateRangeDirCtrl',[
-    '$scope',
-    '$state',
-    '$stateParams',
-    'moment',
-    function ServiceDateRangeDirCtrl ($scope, $state, $stateParams, moment) {
-        'use strict';
-
-        $scope.change_date = function () {
-
-            var next_start = moment($scope.start).format('YYYY-MM-DD'),
-                next_end = moment($scope.end).format('YYYY-MM-DD');
-
-            $state.go($state.current.name, {start_date: next_start, end_date: next_end});
-        };
-    }
-]);
-
-/**
- * Service Date Range Directive
- */
-angular.module('go.aviation.app')
-
-.directive('serviceDateRange',[
-
-    function serviceDateRange () {
-        'use strict';
-
-        return {
-            restrict: 'E',
-            controller: 'ServiceDateRangeDirCtrl',
-            scope: {
-                start: '=',
-                end: '='
-            },
-            templateUrl: 'go-aviation/directives/service-date-range/service-date-range.tpl.html',
-            replace: true
         };
     }
 ]);

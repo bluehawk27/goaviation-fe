@@ -316,7 +316,7 @@ gulp.task('index', ['html2js', 'scripts', 'styles'], function () {
 
 gulp.task('index:dist', ['html2js', 'scripts:dist', 'styles:dist'], function () {
     var output = gulp.src('./src/app/index.html')
-        .pipe($.rename('index.html'))
+        .pipe($.rename('home.html'))
         .pipe($.template(templateIndex(config.paths.build.dist)))
         .pipe(gulp.dest(config.paths.build.dist));
 

@@ -1,1 +1,1 @@
-<?php include_once("/app/dist/home.html"); ?>
+<?php include_once("home.html"); ?>

@@ -12,7 +12,8 @@
     "scripts": {
         "test": "gulp test",
         "build": "gulp build:dist -f",
-        "start": "gulp watch"
+        "start": "gulp build:dist -f",
+        "start-dev": "gulp watch"
     },
     "dependencies": {
         "colors": "^1.1.2",

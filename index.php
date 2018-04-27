@@ -1,1 +1,1 @@
-<?php include_once("home.html"); ?>
+<?php include_once(dirname(__DIR__) . "/dist/home.html"); ?>

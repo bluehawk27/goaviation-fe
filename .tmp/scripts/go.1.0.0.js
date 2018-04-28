@@ -93893,53 +93893,6 @@ angular.module('go.aviation.app')
 ]);
 
 /**
- * Service Date Range Directive Controller
- */
-angular.module('go.aviation.app')
-
-
-.controller('ServiceDateRangeDirCtrl',[
-    '$scope',
-    '$state',
-    '$stateParams',
-    'moment',
-    function ServiceDateRangeDirCtrl ($scope, $state, $stateParams, moment) {
-        'use strict';
-
-        $scope.change_date = function () {
-
-            var next_start = moment($scope.start).format('YYYY-MM-DD'),
-                next_end = moment($scope.end).format('YYYY-MM-DD');
-
-            $state.go($state.current.name, {start_date: next_start, end_date: next_end});
-        };
-    }
-]);
-
-/**
- * Service Date Range Directive
- */
-angular.module('go.aviation.app')
-
-.directive('serviceDateRange',[
-
-    function serviceDateRange () {
-        'use strict';
-
-        return {
-            restrict: 'E',
-            controller: 'ServiceDateRangeDirCtrl',
-            scope: {
-                start: '=',
-                end: '='
-            },
-            templateUrl: 'go-aviation/directives/service-date-range/service-date-range.tpl.html',
-            replace: true
-        };
-    }
-]);
-
-/**
  * Image Upload Directive Controller
  */
 angular.module('go.aviation.app')
@@ -94002,6 +93955,53 @@ angular.module('go.aviation.app')
                 imageType: '=',
                 imageId: '='
             }
+        };
+    }
+]);
+
+/**
+ * Service Date Range Directive Controller
+ */
+angular.module('go.aviation.app')
+
+
+.controller('ServiceDateRangeDirCtrl',[
+    '$scope',
+    '$state',
+    '$stateParams',
+    'moment',
+    function ServiceDateRangeDirCtrl ($scope, $state, $stateParams, moment) {
+        'use strict';
+
+        $scope.change_date = function () {
+
+            var next_start = moment($scope.start).format('YYYY-MM-DD'),
+                next_end = moment($scope.end).format('YYYY-MM-DD');
+
+            $state.go($state.current.name, {start_date: next_start, end_date: next_end});
+        };
+    }
+]);
+
+/**
+ * Service Date Range Directive
+ */
+angular.module('go.aviation.app')
+
+.directive('serviceDateRange',[
+
+    function serviceDateRange () {
+        'use strict';
+
+        return {
+            restrict: 'E',
+            controller: 'ServiceDateRangeDirCtrl',
+            scope: {
+                start: '=',
+                end: '='
+            },
+            templateUrl: 'go-aviation/directives/service-date-range/service-date-range.tpl.html',
+            replace: true
         };
     }
 ]);

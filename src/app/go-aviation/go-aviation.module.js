@@ -9,7 +9,7 @@ angular.module('go.aviation.app', [
     'ui.bootstrap.datetimepicker'
 ])
 .constant('moment', (typeof global !== 'undefined' ? global : this).moment)
-.constant('api_url', 'http://localhost:8000/api/')
+.constant('api_url', 'https://go-aviation.herokuapp.com/api/')
 .run(function ($http, $rootScope, $state) {
         "use strict";
 

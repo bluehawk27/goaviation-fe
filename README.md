@@ -19,7 +19,7 @@ All project dependencies are now installed.
 
 ## Build Options
 
-```gulp build```  --
+```gulp build ```  --
 This is will execute the build tools and generate all necessary files to properly run the application.  This will generate a one-time build.  If you make changes to any files, you must re-run this command.
 
 ```gulp watch``` --

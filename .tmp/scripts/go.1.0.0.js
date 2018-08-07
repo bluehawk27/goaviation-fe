@@ -93405,55 +93405,6 @@ angular.module('go.aviation.app')
 ]);
 
 /**
- * Profile Controller
- */
-angular.module('go.aviation.app')
-
-.controller('ProfileCtrl',[
-    '$scope',
-    '$rootScope',
-    '$filter',
-    '$uibModal',
-    'GoResource',
-    function ProfileCtrl ($scope, $rootScope, $filter, $uibModal, GoResource) {
-        'use strict';
-
-        $scope.profile = null;
-        $scope.aircraft_list = null;
-
-        GoResource.get_resource('aircraft/').then(function (result) {
-
-            $scope.aircraft_list = result;
-        });
-
-        GoResource.get_resource('profiles/').then(function (result) {
-            $scope.profile = $filter('filter')(result, {user: $rootScope.user.id})[0];
-        });
-
-
-        $scope.aircraft_modal = function (aircraft) {
-
-            $uibModal.open({
-                templateUrl: 'go-aviation/profile/aircraft-modal/aircraft-modal.tpl.html',
-                controller: 'AircraftModalCtrl',
-                resolve: {
-                    aircraft: function () {
-                        return aircraft;
-                    },
-
-                    parentCtrlScope: function () {
-                        return $scope;
-                    }
-                }
-            });
-        };
-
-    }
-]);
-
-
-
-/**
  * Resource
  */
 angular.module('go.aviation.app')
@@ -93716,82 +93667,40 @@ angular.module('go.aviation.app')
     }
 ]);
 /**
- * Check-list-modal Controller
+ * Profile Controller
  */
 angular.module('go.aviation.app')
 
-.controller('CheckListModalCtrl',[
+.controller('ProfileCtrl',[
     '$scope',
-    '$uibModalInstance',
+    '$rootScope',
+    '$filter',
     '$uibModal',
     'GoResource',
-    'list',
-    'available_items',
-    'parentCtrlScope',
-
-    function CheckListModalCtrl ($scope, $uibModalInstance, $uibModal, GoResource, list, available_items, parentCtrlScope) {
+    function ProfileCtrl ($scope, $rootScope, $filter, $uibModal, GoResource) {
         'use strict';
 
-        var edit_list = list ? true : false;
+        $scope.profile = null;
+        $scope.aircraft_list = null;
 
-        $scope.available_items = available_items;
+        GoResource.get_resource('aircraft/').then(function (result) {
 
-        $scope.modal_action = edit_list ? 'Edit Check List' : 'Add Check List';
+            $scope.aircraft_list = result;
+        });
 
-        $scope.list = list ||
-            {
-                id: null,
-                name: null,
-                items: []
-            };
+        GoResource.get_resource('profiles/').then(function (result) {
+            $scope.profile = $filter('filter')(result, {user: $rootScope.user.id})[0];
+        });
 
-        $scope.item_to_add = null;
 
-        $scope.remove_item = function (index) {
-
-            $scope.list.items.splice(index,1);
-        };
-
-        $scope.add_item = function () {
-
-            if ($scope.item_to_add &&
-                $scope.list.items.indexOf($scope.item_to_add) < 0) {
-
-                $scope.list.items.push($scope.item_to_add);
-                $scope.item_to_add = null;
-            }
-        };
-
-        $scope.edit = function () {
-            $scope.update_list = list;
-            $scope.edit_list = true;
-        };
-
-        $scope.save_list = function () {
-
-            var method = edit_list ? GoResource.update_resource : GoResource.add_resource;
-
-            method('checkoff-list-template/', $scope.list).then(function (result) {
-                $scope.list = result;
-
-                if (!edit_list) {
-                    parentCtrlScope.list_list.push(list);
-                }
-
-                $scope.close();
-            });
-        };
-
-        $scope.check_off_item_modal = function (item) {
+        $scope.aircraft_modal = function (aircraft) {
 
             $uibModal.open({
-                templateUrl: 'go-aviation/check-lists/check-list-modal/check-off-item-modal/check-off-item-modal.tpl.html',
-                windowClass: 'check-off-item-modal',
-                controller: 'CheckOffItemModalCtrl',
+                templateUrl: 'go-aviation/profile/aircraft-modal/aircraft-modal.tpl.html',
+                controller: 'AircraftModalCtrl',
                 resolve: {
-
-                    item: function () {
-                        return item;
+                    aircraft: function () {
+                        return aircraft;
                     },
 
                     parentCtrlScope: function () {
@@ -93801,8 +93710,44 @@ angular.module('go.aviation.app')
             });
         };
 
-        $scope.close = function () {
-            $uibModalInstance.dismiss('close');
+    }
+]);
+
+
+
+/**
+ * Nav Directive Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('GoNavDirCtrl',[
+    '$rootScope',
+    '$scope',
+
+    function GoNavDirCtrl ($rootScope, $scope) {
+        'use strict';
+
+        $scope.logout = function () {
+            $rootScope.$broadcast('log_out');
+        };
+    }
+]);
+
+/**
+ * Navigation directive
+ */
+angular.module('go.aviation.app')
+
+.directive('goNav',[
+
+    function goNav () {
+        'use strict';
+
+        return {
+            restrict: 'E',
+            controller: 'GoNavDirCtrl',
+            templateUrl: 'go-aviation/directives/go-nav/go-nav.tpl.html',
+            replace: true
         };
     }
 ]);
@@ -93851,43 +93796,6 @@ angular.module('go.aviation.app')
 
             templateUrl: 'go-aviation/directives/alert/alert-dir.tpl.html',
             replace: false
-        };
-    }
-]);
-
-/**
- * Nav Directive Controller
- */
-angular.module('go.aviation.app')
-
-.controller('GoNavDirCtrl',[
-    '$rootScope',
-    '$scope',
-
-    function GoNavDirCtrl ($rootScope, $scope) {
-        'use strict';
-
-        $scope.logout = function () {
-            $rootScope.$broadcast('log_out');
-        };
-    }
-]);
-
-/**
- * Navigation directive
- */
-angular.module('go.aviation.app')
-
-.directive('goNav',[
-
-    function goNav () {
-        'use strict';
-
-        return {
-            restrict: 'E',
-            controller: 'GoNavDirCtrl',
-            templateUrl: 'go-aviation/directives/go-nav/go-nav.tpl.html',
-            replace: true
         };
     }
 ]);
@@ -94162,6 +94070,98 @@ angular.module('go.aviation.app')
 ]);
 
 /**
+ * Check-list-modal Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('CheckListModalCtrl',[
+    '$scope',
+    '$uibModalInstance',
+    '$uibModal',
+    'GoResource',
+    'list',
+    'available_items',
+    'parentCtrlScope',
+
+    function CheckListModalCtrl ($scope, $uibModalInstance, $uibModal, GoResource, list, available_items, parentCtrlScope) {
+        'use strict';
+
+        var edit_list = list ? true : false;
+
+        $scope.available_items = available_items;
+
+        $scope.modal_action = edit_list ? 'Edit Check List' : 'Add Check List';
+
+        $scope.list = list ||
+            {
+                id: null,
+                name: null,
+                items: []
+            };
+
+        $scope.item_to_add = null;
+
+        $scope.remove_item = function (index) {
+
+            $scope.list.items.splice(index,1);
+        };
+
+        $scope.add_item = function () {
+
+            if ($scope.item_to_add &&
+                $scope.list.items.indexOf($scope.item_to_add) < 0) {
+
+                $scope.list.items.push($scope.item_to_add);
+                $scope.item_to_add = null;
+            }
+        };
+
+        $scope.edit = function () {
+            $scope.update_list = list;
+            $scope.edit_list = true;
+        };
+
+        $scope.save_list = function () {
+
+            var method = edit_list ? GoResource.update_resource : GoResource.add_resource;
+
+            method('checkoff-list-template/', $scope.list).then(function (result) {
+                $scope.list = result;
+
+                if (!edit_list) {
+                    parentCtrlScope.list_list.push(list);
+                }
+
+                $scope.close();
+            });
+        };
+
+        $scope.check_off_item_modal = function (item) {
+
+            $uibModal.open({
+                templateUrl: 'go-aviation/check-lists/check-list-modal/check-off-item-modal/check-off-item-modal.tpl.html',
+                windowClass: 'check-off-item-modal',
+                controller: 'CheckOffItemModalCtrl',
+                resolve: {
+
+                    item: function () {
+                        return item;
+                    },
+
+                    parentCtrlScope: function () {
+                        return $scope;
+                    }
+                }
+            });
+        };
+
+        $scope.close = function () {
+            $uibModalInstance.dismiss('close');
+        };
+    }
+]);
+
+/**
  * List-modal Controller
  */
 angular.module('go.aviation.app')
@@ -94238,6 +94238,60 @@ angular.module('go.aviation.app')
 ]);
 
 /**
+ * Service-modal Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('ServiceModalCtrl',[
+    '$scope',
+    '$uibModalInstance',
+    'GoResource',
+    'service',
+    'parentCtrlScope',
+
+    function ServiceModalCtrl ($scope, $uibModalInstance, GoResource, service, parentCtrlScope) {
+        'use strict';
+
+        var edit_service = service ? true : false;
+
+        $scope.modal_action = edit_service ? 'Edit Service' : 'Add Service';
+
+        $scope.service = service ||
+            {
+                id: null,
+                name: null,
+                description: null,
+                check_off_list: null
+            };
+
+
+        $scope.edit = function () {
+            $scope.update_service = service;
+            $scope.edit_service = true;
+        };
+
+        $scope.save_service = function (service) {
+
+            var method = edit_service ? GoResource.update_resource : GoResource.add_resource;
+
+            method('services/', service).then(function (result) {
+                service = result;
+
+                if (!edit_service) {
+                    parentCtrlScope.services.push(service);
+                }
+
+                $scope.close();
+            });
+        };
+
+        $scope.close = function () {
+            $uibModalInstance.dismiss('close');
+        };
+    }
+]);
+
+/**
  * Aircraft-modal Controller
  */
 angular.module('go.aviation.app')
@@ -94286,60 +94340,6 @@ angular.module('go.aviation.app')
 
                 if (!edit_aircraft) {
                     parentCtrlScope.aircraft_list.push(aircraft);
-                }
-
-                $scope.close();
-            });
-        };
-
-        $scope.close = function () {
-            $uibModalInstance.dismiss('close');
-        };
-    }
-]);
-
-/**
- * Service-modal Controller
- */
-angular.module('go.aviation.app')
-
-.controller('ServiceModalCtrl',[
-    '$scope',
-    '$uibModalInstance',
-    'GoResource',
-    'service',
-    'parentCtrlScope',
-
-    function ServiceModalCtrl ($scope, $uibModalInstance, GoResource, service, parentCtrlScope) {
-        'use strict';
-
-        var edit_service = service ? true : false;
-
-        $scope.modal_action = edit_service ? 'Edit Service' : 'Add Service';
-
-        $scope.service = service ||
-            {
-                id: null,
-                name: null,
-                description: null,
-                check_off_list: null
-            };
-
-
-        $scope.edit = function () {
-            $scope.update_service = service;
-            $scope.edit_service = true;
-        };
-
-        $scope.save_service = function (service) {
-
-            var method = edit_service ? GoResource.update_resource : GoResource.add_resource;
-
-            method('services/', service).then(function (result) {
-                service = result;
-
-                if (!edit_service) {
-                    parentCtrlScope.services.push(service);
                 }
 
                 $scope.close();

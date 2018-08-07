@@ -93856,6 +93856,43 @@ angular.module('go.aviation.app')
 ]);
 
 /**
+ * Nav Directive Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('GoNavDirCtrl',[
+    '$rootScope',
+    '$scope',
+
+    function GoNavDirCtrl ($rootScope, $scope) {
+        'use strict';
+
+        $scope.logout = function () {
+            $rootScope.$broadcast('log_out');
+        };
+    }
+]);
+
+/**
+ * Navigation directive
+ */
+angular.module('go.aviation.app')
+
+.directive('goNav',[
+
+    function goNav () {
+        'use strict';
+
+        return {
+            restrict: 'E',
+            controller: 'GoNavDirCtrl',
+            templateUrl: 'go-aviation/directives/go-nav/go-nav.tpl.html',
+            replace: true
+        };
+    }
+]);
+
+/**
  * Image Upload Directive Controller
  */
 angular.module('go.aviation.app')
@@ -93918,43 +93955,6 @@ angular.module('go.aviation.app')
                 imageType: '=',
                 imageId: '='
             }
-        };
-    }
-]);
-
-/**
- * Nav Directive Controller
- */
-angular.module('go.aviation.app')
-
-.controller('GoNavDirCtrl',[
-    '$rootScope',
-    '$scope',
-
-    function GoNavDirCtrl ($rootScope, $scope) {
-        'use strict';
-
-        $scope.logout = function () {
-            $rootScope.$broadcast('log_out');
-        };
-    }
-]);
-
-/**
- * Navigation directive
- */
-angular.module('go.aviation.app')
-
-.directive('goNav',[
-
-    function goNav () {
-        'use strict';
-
-        return {
-            restrict: 'E',
-            controller: 'GoNavDirCtrl',
-            templateUrl: 'go-aviation/directives/go-nav/go-nav.tpl.html',
-            replace: true
         };
     }
 ]);

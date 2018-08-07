@@ -94007,6 +94007,51 @@ angular.module('go.aviation.app')
 ]);
 
 /**
+ * Table Headers Directive Controller
+ */
+angular.module('go.aviation.app')
+
+.controller('TableHeadersDirCtrl',[
+    '$scope',
+    function TableHeadersDirCtrl ($scope) {
+        'use strict';
+
+        $scope.sort_column = function (column) {
+            if ($scope.column === column) {
+                $scope.invert = !$scope.invert;
+            } else {
+                $scope.column = column;
+            }
+        };
+
+    }
+]);
+
+/**
+ * Table Headers directive
+ */
+angular.module('go.aviation.app')
+
+.directive('tableHeaders',[
+
+    function tableHeaders () {
+        'use strict';
+
+        return {
+            restrict: 'A',
+            controller: 'TableHeadersDirCtrl',
+            scope: {
+                column: '=',
+                list: '=',
+                invert: '='
+            },
+            templateUrl: 'go-aviation/directives/table-headers/table-headers.tpl.html',
+            replace: false
+        };
+    }
+]);
+
+/**
  * Test Results Table Directive Controller
  */
 angular.module('go.aviation.app')
@@ -94111,51 +94156,6 @@ angular.module('go.aviation.app')
                 endDate: '='
             },
             templateUrl: 'go-aviation/directives/service-table/service-table.tpl.html',
-            replace: false
-        };
-    }
-]);
-
-/**
- * Table Headers Directive Controller
- */
-angular.module('go.aviation.app')
-
-.controller('TableHeadersDirCtrl',[
-    '$scope',
-    function TableHeadersDirCtrl ($scope) {
-        'use strict';
-
-        $scope.sort_column = function (column) {
-            if ($scope.column === column) {
-                $scope.invert = !$scope.invert;
-            } else {
-                $scope.column = column;
-            }
-        };
-
-    }
-]);
-
-/**
- * Table Headers directive
- */
-angular.module('go.aviation.app')
-
-.directive('tableHeaders',[
-
-    function tableHeaders () {
-        'use strict';
-
-        return {
-            restrict: 'A',
-            controller: 'TableHeadersDirCtrl',
-            scope: {
-                column: '=',
-                list: '=',
-                invert: '='
-            },
-            templateUrl: 'go-aviation/directives/table-headers/table-headers.tpl.html',
             replace: false
         };
     }

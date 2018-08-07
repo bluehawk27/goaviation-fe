@@ -8517,7 +8517,7 @@ footer {
 }
 footer .powered-by {
   background-size: contain;
-  background-image: url("/assets/powered-by.png");
+  background-image: url("../../.../powered-by.png");
   background-repeat: no-repeat;
   width: 189px;
   height: 50px;
